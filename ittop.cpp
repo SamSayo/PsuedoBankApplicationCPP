@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	setlocale(0, "");
-	
+
 	Card dummy;
 	char choice = '0';
 
@@ -45,6 +45,10 @@ int main()
 			dummy.printAll();
 			break;
 
+		case 'd':
+			dummy.debugFoo();
+			break;
+
 		case '0':
 			system("cls");
 			cout << "Пока пока!" << endl;
@@ -56,8 +60,7 @@ int main()
 			system("pause");
 			break;
 		}
-	} 
-	while (choice != '0');
+	} while (choice != '0');
 }
 
 //Создайте подобие банковского приложения. Система должна иметь следующие возможности: 

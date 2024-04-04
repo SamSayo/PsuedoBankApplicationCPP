@@ -1,13 +1,14 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
 class Card
 {
 private:
-	ifstream costs;
+	fstream costs;
 	string cardName = "Отсутствует";
 	string accountName;
 	float balance = 0;
@@ -20,7 +21,7 @@ public:
 
 	Card()
 	{
-		costs.open("account.pb", ios::out | ios::app | ios::binary);
+		costs.open("account.lorembank", ios::in | ios::out | ios::app);
 		if (!costs)
 		{
 			cout << "Не удалось открыть файл" << endl;
@@ -148,7 +149,7 @@ public:
 
 			cout << "Введите сумму, которую хотите снять со счёта: ";
 			cin >> sum;
-			if(sum > balance)
+			if (sum > balance || sum == 0)
 			{
 				cout << "У вас на балансе меньше средств, чем вы хотите снять"
 					<< endl << "А именно: " << balance << " руб." << endl;
@@ -156,11 +157,48 @@ public:
 			}
 			else
 			{
+				int choice;
+				cout << "Выберите, на что вы тратите деньги: "
+					<< endl << "1. Снятие денег\t2. Покупка товара"
+					<< endl << "3. Пополнение телефона\t4. Оплата ЖКХ";
+				cout << endl << "Выбор: ";
+				cin >> choice;
+
+				switch (choice)
+				{
+				case 1:
+					costs << "Снятие денег: " << sum << endl;
+					break;
+
+				case 2:
+					costs << "Покупка: " << sum << endl;
+					break;
+
+				case 3:
+					costs << "Пополнение телефона: " << sum << endl;
+					break;
+
+				case 4:
+					costs << "Оплата ЖКХ: " << sum << endl;
+					break;
+				}
+
 				balance -= sum;
 				cout << endl << "Баланс счёта теперь равен " << balance << " руб." << endl;
 				system("pause");
 			}
 		}
+	}
+
+	void debugFoo()
+	{
+		system("cls");
+		string word;
+		while (getline(costs, word))
+		{
+			cout << word << endl;
+		}
+		system("pause");
 	}
 
 	void printAll()
