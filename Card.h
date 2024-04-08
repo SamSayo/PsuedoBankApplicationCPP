@@ -16,9 +16,6 @@ private:
 	bool isDebit = false;
 	bool accountExist = true;
 	bool cardExist = false;
-	double day;
-	double week[7];
-	double month[30];
 
 public:
 
